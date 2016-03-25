@@ -1,0 +1,16 @@
+header h3 {
+	padding: 50px;
+	margin: 0;
+}
+
+.sidebar {
+	margin-top: 20px;
+}
+
+table {
+	width: 100%;
+}
+
+#content {
+	margin-bottom: 20px;
+}
