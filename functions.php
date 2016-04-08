@@ -21,7 +21,8 @@ function wordcampsc_theme_support() {
 	add_theme_support( 'custom-header', array(
 		'width' => 1170,
 		'height' => 150,
-		'default-image' => get_stylesheet_directory_uri() . '/images/Wordcamp_Sunshine_Coast_Hero_Background_7.jpg'
+		'default-image' => get_stylesheet_directory_uri() . '/images/Wordcamp_Sunshine_Coast_Hero_Background_7.jpg',
+		'header-text' => false
 	) );
 	add_theme_support( 'custom-background' );
 	add_theme_support( 'title-tag' );
