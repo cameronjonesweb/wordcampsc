@@ -1,5 +1,4 @@
 <?php
-
 //Actions
 add_action( 'wp_enqueue_scripts', 'wordcampsc_enqueue_resources' );
 add_action( 'after_setup_theme', 'wordcampsc_theme_support' );
@@ -9,11 +8,14 @@ add_action( 'customize_register', 'wordcampsc_customize_register' );
 add_action( 'wp_head', 'wordcampsc_customize_styles' );
 
 function wordcampsc_enqueue_resources() {
+	
 	wp_enqueue_style( 'bootstrap', get_stylesheet_directory_uri() . '/css/bootstrap.min.css' );
 	wp_enqueue_style( 'wordcampsc', get_stylesheet_directory_uri() . '/css/style.css' );
+	
 }
 
 function wordcampsc_theme_support() {
+	
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'custom-header', array(
 		'width' => 1170,
@@ -22,10 +24,10 @@ function wordcampsc_theme_support() {
 	) );
 	add_theme_support( 'custom-background' );
 	add_theme_support( 'title-tag' );
+	
 }
 
 function wordcampsc_widgets_init() {
-
 	register_sidebar( array(
 		'name'          => 'Right Sidebar',
 		'id'            => 'right',
@@ -34,21 +36,26 @@ function wordcampsc_widgets_init() {
 		'before_title'  => '<h2 class="rounded">',
 		'after_title'   => '</h2>',
 	) );
-
 }
 
 function wordcampsc_menus() {
+	
 	register_nav_menus(
 		array(
 			'left-menu' => __( 'Left Sidebar Menu', 'wordcampsc' )
 		)
 	);
+	
 }
 
 function wordcampsc_customize_styles() {
+	
 	echo '<style id="wordcampsc_customize_styles"></style>';
+	
 }
 
 function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
-
+	
+	
+	
 }
