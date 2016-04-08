@@ -72,5 +72,11 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 		'sanitize_callback' => 'sanitize_hex_color',
 		//'sanitize_js_callback' => '', // Basically to_json.
 	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'wordcampsc_link_colour', array(
+		'label'        => __( 'Link Colour', 'wordcampsc' ),
+		'section'    => 'colors',
+		//'settings'   => 'wordcampsc_link_colour',
+	) ) );
 	
 }
