@@ -55,7 +55,7 @@ function wordcampsc_menus() {
 function wordcampsc_customize_styles() {
 	
 	echo '<style id="wordcampsc_customize_styles">';
-		echo get_theme_mod( 'wordcampsc_link_colour', '' );
+		echo 'a:link{color:' . get_theme_mod( 'wordcampsc_link_colour', '' ) . ';}';
 	echo '</style>';
 	
 }
