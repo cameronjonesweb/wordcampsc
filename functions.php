@@ -1,4 +1,5 @@
 <?php
+
 //Actions
 add_action( 'wp_enqueue_scripts', 'wordcampsc_enqueue_resources' );
 add_action( 'after_setup_theme', 'wordcampsc_theme_support' );
@@ -28,6 +29,7 @@ function wordcampsc_theme_support() {
 }
 
 function wordcampsc_widgets_init() {
+
 	register_sidebar( array(
 		'name'          => 'Right Sidebar',
 		'id'            => 'right',
@@ -36,6 +38,7 @@ function wordcampsc_widgets_init() {
 		'before_title'  => '<h2 class="rounded">',
 		'after_title'   => '</h2>',
 	) );
+
 }
 
 function wordcampsc_menus() {
@@ -48,14 +51,26 @@ function wordcampsc_menus() {
 	
 }
 
+
 function wordcampsc_customize_styles() {
 	
-	echo '<style id="wordcampsc_customize_styles"></style>';
+	echo '<style id="wordcampsc_customize_styles">';
+		echo get_theme_mod( 'wordcampsc_link_colour', '' );
+	echo '</style>';
 	
 }
 
 function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 	
-	
+	//Add a setting that changes the colour of links
+	$wp_customize->add_setting( 'wordcampsc_link_colour', array(
+		'type' => 'theme_mod', // or 'option'
+		'capability' => 'edit_theme_options',
+		//'theme_supports' => '', // Rarely needed.
+		'default' => '#337ab7', //Bootstrap link colour
+		'transport' => 'postMessage', // or postMessage
+		'sanitize_callback' => 'sanitize_hex_color',
+		//'sanitize_js_callback' => '', // Basically to_json.
+	) );
 	
 }
