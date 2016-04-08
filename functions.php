@@ -31,7 +31,7 @@ function wordcampsc_theme_support() {
 function wordcampsc_widgets_init() {
 
 	register_sidebar( array(
-		'name'          => 'Right Sidebar',
+		'name'          => __( 'Right Sidebar', 'wordcampsc' ),
 		'id'            => 'right',
 		'before_widget' => '<div>',
 		'after_widget'  => '</div>',
