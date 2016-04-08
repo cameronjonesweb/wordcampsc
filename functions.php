@@ -78,5 +78,12 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 		'section'    => 'colors',
 		//'settings'   => 'wordcampsc_link_colour',
 	) ) );
+
+	$wp_customize->selective_refresh->add_partial( 'wordcampsc_link_colour', array(
+        'selector' => '#wordcampsc_customize_styles',
+        'render_callback' => function() {
+            echo 'a:link{color:' . get_theme_mod( 'wordcampsc_link_colour', '' ) . '};';
+        },
+    ) );
 	
 }
