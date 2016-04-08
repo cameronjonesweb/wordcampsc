@@ -6,6 +6,7 @@ add_action( 'after_setup_theme', 'wordcampsc_theme_support' );
 add_action( 'widgets_init', 'wordcampsc_widgets_init' );
 add_action( 'init', 'wordcampsc_menus' );
 add_action( 'customize_register', 'wordcampsc_customize_register' );
+add_action( 'wp_head', 'wordcampsc_customize_styles' );
 
 function wordcampsc_enqueue_resources() {
 	wp_enqueue_style( 'bootstrap', get_stylesheet_directory_uri() . '/css/bootstrap.min.css' );
@@ -42,6 +43,10 @@ function wordcampsc_menus() {
 			'left-menu' => __( 'Left Sidebar Menu', 'wordcampsc' )
 		)
 	);
+}
+
+function wordcampsc_customize_styles() {
+	echo '<style id="wordcampsc_customize_styles"></style>';
 }
 
 function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
