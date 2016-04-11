@@ -56,7 +56,7 @@ function wordcampsc_menus() {
 function wordcampsc_customize_styles() {
 	
 	echo '<style id="wordcampsc_customize_styles">';
-		echo 'a{color:' . get_theme_mod( 'wordcampsc_link_colour', '' ) . ';}';
+		wordcampsc_customize_style_output();
 	echo '</style>';
 	
 }
@@ -83,8 +83,12 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 	$wp_customize->selective_refresh->add_partial( 'wordcampsc_link_colour', array(
         'selector' => '#wordcampsc_customize_styles',
         'render_callback' => function() {
-            echo 'a{color:' . get_theme_mod( 'wordcampsc_link_colour', '' ) . '};';
+            wordcampsc_customize_style_output();
         },
     ) );
 	
+}
+
+function wordcampsc_customize_style_output() {
+	echo 'a{color:' . get_theme_mod( 'wordcampsc_link_colour', '' ) . '};'; 
 }
