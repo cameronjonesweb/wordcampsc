@@ -26,6 +26,7 @@ function wordcampsc_theme_support() {
 	) );
 	add_theme_support( 'custom-background' );
 	add_theme_support( 'title-tag' );
+	add_theme_support( 'customize-selective-refresh-widgets' );
 	
 }
 
@@ -65,19 +66,16 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 	
 	//Add a setting that changes the colour of links
 	$wp_customize->add_setting( 'wordcampsc_link_colour', array(
-		'type' => 'theme_mod', // or 'option'
+		'type' => 'theme_mod',
 		'capability' => 'edit_theme_options',
-		//'theme_supports' => '', // Rarely needed.
-		'default' => '#337ab7', //Bootstrap link colour
-		'transport' => 'postMessage', // or postMessage
+		'default' => '#337ab7', 
+		'transport' => 'postMessage',
 		'sanitize_callback' => 'sanitize_hex_color',
-		//'sanitize_js_callback' => '', // Basically to_json.
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'wordcampsc_link_colour', array(
 		'label'        => __( 'Link Colour', 'wordcampsc' ),
 		'section'    => 'colors',
-		//'settings'   => 'wordcampsc_link_colour',
 	) ) );
 
 	$wp_customize->selective_refresh->add_partial( 'wordcampsc_link_colour', array(
