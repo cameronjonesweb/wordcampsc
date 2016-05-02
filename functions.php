@@ -87,22 +87,39 @@ function wordcampsc_customize_styles() {
 
 function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 	
-	//Add a setting that changes the colour of links
+	/** 
+	 * Add a setting that changes the colour of links
+	 * 
+	 * @example $wp_customize->add_setting( $setting, $args );
+	 * 			$args = array(
+	 *				'default' => $default, // A default value for the setting if none is defined.
+	 * 				'type' => $type, // Optional. Specifies the TYPE of setting this is. Options are 'option' (best for plugins) or 'theme_mod' (best for themes) (defaults to 'theme_mod')
+	 *				'capability' => $capability, // Optional. You can define a capability a user must have to modify this setting. Default if not specified: edit_theme_options
+	 * 				'theme_supports' => $theme_supports, // Optional. This can be used to hide a setting if the theme lacks support for a specific feature (using add_theme_support).
+	 *				'transport' => $transport, // Optional. This can be either 'refresh' (default) or 'postMessage'. Set to 'postMessage' for settings that will update in the live preview such as colours
+	 *				'sanitize_callback' => $sanitize_callback, // Optional. A function name to call for sanitizing the input value for this setting. The function should be of the form of a standard filter function, where it accepts the input data and returns the sanitized data.
+	 * 				sanitize_js_callback => $sanitize_js_callback // Optional. A function name to call for sanitizing the value for this setting for the purposes of outputting to javascript code. The function should be of the form of a standard filter function, where it accepts the input data and returns the sanitized data. This is only necessary if the data to be sent to the customizer window has a special form.
+	 * 			);
+	 * 					
+	 */
 	$wp_customize->add_setting( 'wordcampsc_link_colour', array(
 		'type' => 'theme_mod',
-		'capability' => 'edit_theme_options',
 		'default' => '#337ab7', 
 		'transport' => 'postMessage',
 		'sanitize_callback' => 'sanitize_hex_color',
 	) );
 
-	//Add a colour picker control to manage the setting.
+	/**
+	 * Add a colour picker control to manage the setting.
+	 */
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'wordcampsc_link_colour', array(
 		'label'        => __( 'Link Colour', 'wordcampsc' ),
 		'section'    => 'colors',
 	) ) );
 
-	//Add a partial to update the preview
+	/**
+	 *Add a partial to update the preview
+	 */
 	$wp_customize->selective_refresh->add_partial( 'wordcampsc_link_colour', array(
         'selector' => '#wordcampsc_customize_styles',
         'render_callback' => function() {
