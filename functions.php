@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * functions.php file for my presentation at WordCamp Sunshine Coast #WordCampSC
+ * 
+ * @author Cameron Jones
+ * @copyright 2016 Cameron Jones
+ * @license GPLv2 http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ */
+
 //Actions
 add_action( 'wp_enqueue_scripts', 'wordcampsc_enqueue_resources' );
 add_action( 'after_setup_theme', 'wordcampsc_theme_support' );
