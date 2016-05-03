@@ -146,6 +146,7 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 	 * Add a partial to update the preview
 	 * 
 	 * This functionality was only introduced in WordPress 4.5 so the documentation is a little lacking.
+	 * Additionally, we're going to provide a fallback so users running less than 4.5 will not be met with errors
 	 * 
 	 * Example: $wp_customize->selective_refresh->add_partial( $id, $args );
 	 * 
@@ -155,12 +156,16 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 	 * );
 	 * 
 	 */
-	$wp_customize->selective_refresh->add_partial( $setting, array(
-        'selector' => '#wordcampsc_customize_styles',
-        'render_callback' => function() {
-            wordcampsc_customize_style_output();
-        },
-    ) );
+	if ( isset( $wp_customize->selective_refresh ) ) {
+		$wp_customize->selective_refresh->add_partial( $setting, array(
+	        'selector' => '#wordcampsc_customize_styles',
+	        'render_callback' => function() {
+	            wordcampsc_customize_style_output();
+	        },
+	    ) );
+	} else {
+		// Enqueue JavaScript here that will update the preview in case users are running < 4.5
+	}
 	
 }
 
