@@ -96,7 +96,7 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 	/** 
 	 * Add a setting that changes the colour of links
 	 * 
-	 * Example: $wp_customize->add_setting( $setting, $args );
+	 * Example: $wp_customize->add_setting( $id, $args );
 	 * 			$setting:  setting id handle/slug
 	 * 			$args = array(
 	 *				'default' => $default, // A default value for the setting if none is defined.
@@ -119,10 +119,22 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 	/**
 	 * Add a colour picker control to manage the setting.
 	 * 
-	 * Basic Example: $wp_customize->add_control( $setting, $args );
+	 * Basic Example: $wp_customize->add_control( $id, $args );
 	 * With this implementation WordPress will instatiate a new WP_Customize_Control, which limits the type of settings to basic form inputs such as text, dropdown, checkbox. For colours and images, use the advanced implementation
 	 * 
-	 * Advanced Example (recommended): $wp_customize->add_control( new $class( $wp_customize, $setting, $args ) );
+	 * Advanced Example (recommended): $wp_customize->add_control( new $class( $wp_customize, $id, $args ) );
+	 * 
+	 * $class: an instance of a Customize Control class. Can be a core class or custom
+	 * 
+	 * $args = array(
+	 * 		'label' => $label, // Optional. Displayed label. Example: 'label' => __( 'Base Color Scheme', 'twentyfifteen' ),
+	 * 		'description' => $description, // Optional. Example: 'description' => __( 'Applied to the header on small screens and the sidebar on wide screens.', 'twentyfifteen' ),
+	 * 		'section' => $section, // Any readily available or user defined section. Some available sections: themes, title_tagline, colors, header_image (only when enabled), background_image (only when enabled), static_front_page. Example: 'section' => 'colors',
+	 * 		'priority' => $priority, // Optional. themes (0), title_tagline (20), colors (40), header_image (60), background_image (80), static_front_page (120).
+	 * 		'type' => $type, // Example: 'type' => 'select',
+	 * 		'settings' => $settings, // Optional. The setting id to retrieve with either get_theme_mod or get_setting. By default it will be $id. For setting-less controls (such as a new post button for example) pass an empty array
+	 * 		'custom' => $custom // Optional. It's possible to pass custom parameters for specific control types. These are available only for some control types. Example for "select" and "radio" controls: 'choices'=> twentyfifteen_get_color_scheme_choices(),
+	 * )
 	 * 
 	 */
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, $setting, array(
@@ -131,7 +143,17 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 	) ) );
 
 	/**
-	 *Add a partial to update the preview
+	 * Add a partial to update the preview
+	 * 
+	 * This functionality was only introduced in WordPress 4.5 so the documentation is a little lacking.
+	 * 
+	 * Example: $wp_customize->selective_refresh->add_partial( $id, $args );
+	 * 
+	 * $args = array(
+	 * 		'selector' => $selector, // CSS Selector to target in the update process
+	 * 		'render_callback' => function() { } // Function to output the updated content to be applied to the selector
+	 * );
+	 * 
 	 */
 	$wp_customize->selective_refresh->add_partial( $setting, array(
         'selector' => '#wordcampsc_customize_styles',
