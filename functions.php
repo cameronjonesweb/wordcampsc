@@ -67,7 +67,6 @@ function wordcampsc_menus() {
 /**
  * Output the styles set by Customizer settings in the <head>
  * 
- * @return void
  */
 
 function wordcampsc_customize_styles() {
@@ -82,7 +81,7 @@ function wordcampsc_customize_styles() {
  * Register the setting field, add setting colour picker control and selective refresh.
  * 
  * @param WP_Customize_Manager $wp_customize 
- * @return void
+ * 
  */
 
 function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
@@ -171,8 +170,6 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 
 /**
  * Outputs styles managed by #WordCampSC controls to be used by partial refresh and front end display
- * 
- * @return void
  */
 
 function wordcampsc_customize_style_output() {
