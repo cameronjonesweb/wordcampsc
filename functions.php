@@ -87,10 +87,17 @@ function wordcampsc_customize_styles() {
 
 function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 	
+	/**
+	 * @var $setting Define the handle for our setting so we don't repeat ourselves.
+	 */ 
+
+	$setting = 'wordcampsc_link_colour';
+
 	/** 
 	 * Add a setting that changes the colour of links
 	 * 
-	 * @example $wp_customize->add_setting( $setting, $args );
+	 * Example: $wp_customize->add_setting( $setting, $args );
+	 * 			$setting:  setting id handle/slug
 	 * 			$args = array(
 	 *				'default' => $default, // A default value for the setting if none is defined.
 	 * 				'type' => $type, // Optional. Specifies the TYPE of setting this is. Options are 'option' (best for plugins) or 'theme_mod' (best for themes) (defaults to 'theme_mod')
@@ -102,7 +109,7 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 	 * 			);
 	 * 					
 	 */
-	$wp_customize->add_setting( 'wordcampsc_link_colour', array(
+	$wp_customize->add_setting( $setting, array(
 		'type' => 'theme_mod',
 		'default' => '#337ab7', 
 		'transport' => 'postMessage',
@@ -111,8 +118,14 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 
 	/**
 	 * Add a colour picker control to manage the setting.
+	 * 
+	 * Basic Example: $wp_customize->add_control( $setting, $args );
+	 * With this implementation WordPress will instatiate a new WP_Customize_Control, which limits the type of settings to basic form inputs such as text, dropdown, checkbox. For colours and images, use the advanced implementation
+	 * 
+	 * Advanced Example (recommended): $wp_customize->add_control( new $class( $wp_customize, $setting, $args ) );
+	 * 
 	 */
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'wordcampsc_link_colour', array(
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, $setting, array(
 		'label'        => __( 'Link Colour', 'wordcampsc' ),
 		'section'    => 'colors',
 	) ) );
@@ -120,7 +133,7 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 	/**
 	 *Add a partial to update the preview
 	 */
-	$wp_customize->selective_refresh->add_partial( 'wordcampsc_link_colour', array(
+	$wp_customize->selective_refresh->add_partial( $setting, array(
         'selector' => '#wordcampsc_customize_styles',
         'render_callback' => function() {
             wordcampsc_customize_style_output();
@@ -136,5 +149,5 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
  */
 
 function wordcampsc_customize_style_output() {
-	echo 'a{color:' . get_theme_mod( 'wordcampsc_link_colour', '' ) . '};'; 
+	echo 'a{color:' . get_theme_mod( $setting, '' ) . '};'; 
 }
