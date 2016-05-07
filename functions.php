@@ -96,7 +96,7 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
 	 * Add a setting that changes the colour of links
 	 * 
 	 * Example: $wp_customize->add_setting( $id, $args );
-	 * 			$setting:  setting id handle/slug
+	 * 			$id:  setting id handle/slug
 	 * 			$args = array(
 	 *				'default' => $default, // A default value for the setting if none is defined.
 	 * 				'type' => $type, // Optional. Specifies the TYPE of setting this is. Options are 'option' (best for plugins) or 'theme_mod' (best for themes) (defaults to 'theme_mod')
@@ -173,5 +173,15 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
  */
 
 function wordcampsc_customize_style_output() {
+
+	/**
+	 * Get the value set in the Customizer and output it in our CSS rule
+	 * 
+	 * Example: get_theme_mod( $id, $default );
+	 * 
+	 * $id: setting id handle/slug
+	 * $default: the default value to return if the setting doesn't exist or hasn't been set
+	 * 
+	 */
 	echo 'a{color:' . get_theme_mod( 'wordcampsc_link_colour', '' ) . '};'; 
 }
