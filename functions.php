@@ -173,5 +173,5 @@ function wordcampsc_customize_register( WP_Customize_Manager $wp_customize ) {
  */
 
 function wordcampsc_customize_style_output() {
-	echo 'a{color:' . get_theme_mod( $setting, '' ) . '};'; 
+	echo 'a{color:' . get_theme_mod( 'wordcampsc_link_colour', '' ) . '};'; 
 }
